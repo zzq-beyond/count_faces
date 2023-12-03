@@ -2,6 +2,8 @@
 Count faces in pictures!
 
 # Rely on
+platform: Ubuntu18.04
+
 python==3.10.5
 
 numpy==1.26.2
