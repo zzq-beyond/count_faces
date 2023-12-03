@@ -2,7 +2,7 @@
 Count faces in pictures!
 
 # Rely on
-platform: Ubuntu18.04
+platform: Ubuntu18.04 or Windows10
 
 python==3.10.5
 
