@@ -18,6 +18,8 @@ torchvision==0.13.1+cpu
 
 2: Terminal input：
 
+    cd count_faces
+    
     python script.py ./images (You can also use your own image path, directory or single image)
 
 3: if you want to evaluate time performance，The command as follows:
