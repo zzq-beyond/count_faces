@@ -16,10 +16,10 @@ torchvision==0.13.1+cpu
 
 2: Terminal input：
 
-    python script.py ./imges (You can also use your own image path, directory or single image)
+    python script.py ./images (You can also use your own image path, directory or single image)
 
 3: if you want to evaluate time performance，The command as follows:
 
-    python script.py ./imges -t True
+    python script.py ./images -t True
     
 
