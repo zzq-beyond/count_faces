@@ -32,8 +32,8 @@ Use conda to configuration, The command as follows:
     
     python script.py ./images (You can also use your own image path, directory or single image)
 
-3: if you want to evaluate time performance，The command as follows:
+3: if you want to evaluate count performance，It can calculate precision and time simply use this command:
 
-    python script.py ./images -t True
+    python script.py ./images -e True
     
 
