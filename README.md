@@ -36,10 +36,13 @@ If you want to detect single image, put the image in the same directory as the s
 
     python script.py your/image/name
 
-3: if you want to evaluate count performance，It can calculate precision and time simply use this command:
+3: If you want to evaluate count performance，It can calculate precision and time simply use this command:
 
 (压缩文件里只有两张照片，没有具体的标签及其形式，所以我只是简单的计算了程序统计的人脸数与实际人脸数的一个对比，TP,TN,FP,FN等具体值暂未计算)
 
-    python script.py ./images -e True
-    
+    python script.py ./images evaluation
+
+4：If you want to test the program basic function，The command as follows:
+
+    python unit_test.py
 
