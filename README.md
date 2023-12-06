@@ -13,7 +13,7 @@ opencv-python==4.8.1.78
 torch==1.12.1+cpu
 
 torchvision==0.13.1+cpu
-# conda installation instruction
+# Conda installation instruction
 Use conda to configuration, The command as follows:
 
     conda create --name count_face python==3.10.5
