@@ -13,6 +13,16 @@ opencv-python==4.8.1.78
 torch==1.12.1+cpu
 
 torchvision==0.13.1+cpu
+# conda installation instruction
+Use conda to configuration, The command as follows:
+
+1:conda create --name count_face python==3.10.5
+
+2:conda activate count_face
+
+3:pip install numpy opencv-python
+
+4:pip install torch==1.12.1+cpu torchvision==0.13.1+cpu --extra-index-url https://download.pytorch.org/whl/cpu
 # Quick start
 1: git clone https://github.com/zzq-beyond/count_faces.git
 
