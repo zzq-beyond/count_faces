@@ -16,7 +16,7 @@ from models.retinaface import RetinaFace
 #parser config
 parser = argparse.ArgumentParser(description='Retinaface')
 parser.add_argument('img_path', default="images", help='choose images path')
-parser.add_argument('-t','--time', default=False, help='record time')
+parser.add_argument('-e','--eval', default=False, help='Evaluation')
 parser.add_argument('-m', '--trained_model', default='./weights/mobilenet0.25_Final.pth',
                     type=str, help='Trained state_dict file path to open')
 parser.add_argument('--network', default='mobile0.25', help='Backbone network mobile0.25 or resnet50')
@@ -25,7 +25,7 @@ parser.add_argument('--confidence_threshold', default=0.02, type=float, help='co
 parser.add_argument('--top_k', default=5000, type=int, help='top_k')
 parser.add_argument('--nms_threshold', default=0.4, type=float, help='nms_threshold')
 parser.add_argument('--keep_top_k', default=750, type=int, help='keep_top_k')
-parser.add_argument('-s', '--save_image', action="store_true", default=True, help='show detection results')
+parser.add_argument('-s', '--save_image', action="store_true", default=False, help='show detection results')
 parser.add_argument('--vis_thres', default=0.6, type=float, help='visualization_threshold')
 args = parser.parse_args()
 
@@ -138,6 +138,7 @@ def load_model(model, pretrained_path, load_to_cpu):
 #program entry
 if __name__ == '__main__':
     total_time = 0
+    total_precision = 0
     torch.set_grad_enabled(False)
     cfg = None
     if args.network == "mobile0.25":
@@ -223,26 +224,37 @@ if __name__ == '__main__':
                 if b[4] > args.vis_thres:
                     count += 1
         # show image
-        # if args.save_image:
-        #     for b in dets:
-        #         if b[4] < args.vis_thres:
-        #             continue
-        #         text = "{:.4f}".format(b[4])
-        #         b = list(map(int, b))
-        #         cv2.rectangle(img_raw, (b[0], b[1]), (b[2], b[3]), (0, 0, 255), 2)
-        #         cx = b[0]
-        #         cy = b[1] + 12
-        #         cv2.putText(img_raw, text, (cx, cy),
-        #                     cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255))
-        #         # landms
-        #         cv2.circle(img_raw, (b[5], b[6]), 1, (0, 0, 255), 4)
-        #         cv2.circle(img_raw, (b[7], b[8]), 1, (0, 255, 255), 4)
-        #         cv2.circle(img_raw, (b[9], b[10]), 1, (255, 0, 255), 4)
-        #         cv2.circle(img_raw, (b[11], b[12]), 1, (0, 255, 0), 4)
-        #         cv2.circle(img_raw, (b[13], b[14]), 1, (255, 0, 0), 4)
-        #         cv2.imwrite(f"{img_path}", img_raw)
-        total_time += eve_time
+        if args.save_image:
+            for b in dets:
+                if b[4] < args.vis_thres:
+                    continue
+                text = "{:.4f}".format(b[4])
+                b = list(map(int, b))
+                cv2.rectangle(img_raw, (b[0], b[1]), (b[2], b[3]), (0, 0, 255), 2)
+                cx = b[0]
+                cy = b[1] + 12
+                cv2.putText(img_raw, text, (cx, cy),
+                            cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255))
+                # landms
+                cv2.circle(img_raw, (b[5], b[6]), 1, (0, 0, 255), 4)
+                cv2.circle(img_raw, (b[7], b[8]), 1, (0, 255, 255), 4)
+                cv2.circle(img_raw, (b[9], b[10]), 1, (255, 0, 255), 4)
+                cv2.circle(img_raw, (b[11], b[12]), 1, (0, 255, 0), 4)
+                cv2.circle(img_raw, (b[13], b[14]), 1, (255, 0, 0), 4)
+                cv2.imwrite(f"demo.jpg", img_raw)
         print(img_path + " " + str(count))
+
+        #eval
+        true_face = img_path.split("_")[0]
+        eve_precision = int(true_face) / count
+        total_time += eve_time
+        total_precision += eve_precision
+
     ave_time = total_time / len(img_list)
-    if args.time:
+    ave_precision = total_precision / len(img_list)
+    if args.eval:
+        print("Precision: {:.2f}%".format(ave_precision*100))
         print("Average Time: {:.3f} ms".format(ave_time))
+    
+    
+    
