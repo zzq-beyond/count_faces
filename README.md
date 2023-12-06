@@ -30,7 +30,11 @@ Use conda to configuration, The command as follows:
 
     cd count_faces
     
-    python script.py ./images (You can also use your own image path, directory or single image)
+    python script.py ./images
+
+If you want to detect single image, put the image in the same directory as the script.py，and run this command:
+
+    python script.py your/image/name
 
 3: if you want to evaluate count performance，It can calculate precision and time simply use this command:
 
