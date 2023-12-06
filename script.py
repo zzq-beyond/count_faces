@@ -134,6 +134,8 @@ class Count(object):
 
     def count_faces(self):
         print("------------------")
+        if len(sys.argv) >= 2:
+            self.images_path = sys.argv[1]
         total_time = 0
         total_precision = 0
         torch.set_grad_enabled(False)
