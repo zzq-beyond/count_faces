@@ -33,6 +33,7 @@ Use conda to configuration, The command as follows:
     python script.py ./images (You can also use your own image path, directory or single image)
 
 3: if you want to evaluate count performance，It can calculate precision and time simply use this command:
+
 (压缩文件里只有两张照片，没有具体的标签及其形式，所以我只是简单的计算了程序统计的人脸数与实际人脸数的一个对比，TP,TN,FP,FN等具体值暂未计算)
 
     python script.py ./images -e True
